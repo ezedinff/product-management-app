@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">Product List</div>
+  <div class="card-body" style="padding: 0;">
+    <div class="list-group" *ngIf = "products?.length">
+      <button class="list-group-item list-group-item-action rounded-0"
+        *ngFor="let product of products"
+        [ngClass]="{'active': product?.id === selectedProduct?.id}"
+        (click)="productSelected(product)">{{ product.productName }}
+        <ng-container *ngIf="displayCode">
+          ({{ product.productCode }})
+        </ng-container>
+      </button>
+    </div>
+  </div>
+  <div class="card-footer">
+    <input type="checkbox" name="display_code" id="display_code" class="checkbox"
+     (change)="checkChanged($event.target.checked)"
+     [checked]="displayCode"
+     >&nbsp;
+    <label for="display_code">Display Product Code</label>
+    <button class="btn btn-primary pull-right" (click)="newProduct()">
+      <i class="fa fa-plus"></i>
+      Add
+    </button>
+  </div>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    Error: {{ errorMessage }}
+</div>
+<br>
